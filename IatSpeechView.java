@@ -45,11 +45,8 @@ public class IatSpeechView extends JPanel implements ActionListener {
 	private JButton jbtnStop;
 	private JButton jbtnHome;
 	private JButton jbtnSet;
-	
-	//new added
-	private static JTextArea resultArea;
 
-	//JTextArea resultArea;
+	JTextArea resultArea;
 
 	// 语音听写对象
 	private SpeechRecognizer mIat;

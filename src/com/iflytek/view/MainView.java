@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.iflytek.cloud.speech.SpeechConstant;
 import com.iflytek.cloud.speech.SpeechUtility;
 import com.iflytek.util.DrawableUtils;
 import com.iflytek.util.Version;
@@ -27,29 +26,45 @@ public class MainView extends JFrame implements ActionListener {
 	private JPanel mMainJpanel;
 	private JPanel mContentPanel;
 	private static JFrame mJframe;
-
-	private JButton jbtnRecognize;
+	private static IatSpeechView iatSpeechView;
+	private static LoginView loginView;
+	private static JLabel label_login;
+	private static JLabel label_main;
 	private JButton jbtnGrammar;
-	private JButton jbtnUnderstander;
-	private JButton jbtnSynthesize;
-
+	private JButton jbtnExit;
+	/*
+	private JButton jbtnExe1;
+	private JButton jbtnExe2;
+	private JButton jbtnExe3;
+	private JButton jbtnExe4;*/
+	
 	/**
 	 * 界面初始化.
 	 * 
 	 */
+	@SuppressWarnings("deprecation")
 	public MainView() {
 		// 初始化
-		StringBuffer param = new StringBuffer();
+		{	StringBuffer param = new StringBuffer();
 		param.append( "appid=" + Version.getAppid() );
 //		param.append( ","+SpeechConstant.LIB_NAME_32+"=myMscName" );
 		SpeechUtility.createUtility( param.toString() );
+		}
+		
 		// 设置界面大小，背景图片
 		ImageIcon background = new ImageIcon("res/index_bg.png");
-		JLabel label = new JLabel(background);
-		label.setBounds(0, 0, background.getIconWidth(),
-				background.getIconHeight());
-		getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
+		ImageIcon background1 = new ImageIcon("res/index_bg1.png");
 
+		label_login = new JLabel(background1);
+		label_main = new JLabel(background);
+		//label_login.setBounds(0, 0, background1.getIconWidth(),
+		//		background1.getIconHeight());
+		label_main.setBounds(0, 0, background.getIconWidth(),
+				background.getIconHeight());
+	    
+		getLayeredPane().add(label_login, new Integer(Integer.MIN_VALUE));
+		
+		
 		int frameWidth = background.getIconWidth();
 		int frameHeight = background.getIconHeight();
 
@@ -57,53 +72,41 @@ public class MainView extends JFrame implements ActionListener {
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		ImageIcon imgRecognize = new ImageIcon("res/btn_recognize.png");
-		jbtnRecognize = this.createImageButton(imgRecognize);
-		jbtnRecognize.setBounds(10, 150, imgRecognize.getIconWidth(),
-				imgRecognize.getIconHeight());
-		//	jbtnRecognize.setBounds(10, 150, imgRecognize.getIconWidth(),
-		//		imgRecognize.getIconHeight());
-		DrawableUtils.setMouseListener(jbtnRecognize, "res/btn_recognize");
-
+		
+	
+		iatSpeechView = new IatSpeechView();
+		loginView = new LoginView();
+		
 		ImageIcon imgGrammar = new ImageIcon("res/btn_grammar.png");
 		jbtnGrammar = this.createImageButton(imgGrammar);
 		jbtnGrammar.setBounds(160, 150, imgGrammar.getIconWidth(),
 				imgGrammar.getIconHeight());
 		DrawableUtils.setMouseListener(jbtnGrammar, "res/btn_grammar");
-/*
-		ImageIcon imgUnderstander = new ImageIcon("res/btn_understander.png");
-		jbtnUnderstander = this.createImageButton(imgUnderstander);
-		jbtnUnderstander.setBounds(310, 150, imgUnderstander.getIconWidth(),
-				imgUnderstander.getIconHeight());
-		DrawableUtils
-				.setMouseListener(jbtnUnderstander, "res/btn_understander");
-
-		ImageIcon imgSynthesize = new ImageIcon("res/btn_synthesize.png");
-		jbtnSynthesize = this.createImageButton(imgSynthesize);
-		jbtnSynthesize.setBounds(460, 150, imgSynthesize.getIconWidth(),
-				imgSynthesize.getIconHeight());
-		DrawableUtils.setMouseListener(jbtnSynthesize, "res/btn_synthesize");*/
-
-		GridLayout gridlayout = new GridLayout(0, 4);
+		
+		ImageIcon imgExit = new ImageIcon("res/btn_exit.png");
+		jbtnExit = this.createImageButton(imgExit);
+		jbtnExit.setBounds(160, 150, imgExit.getIconWidth(),
+				imgExit.getIconHeight());
+		DrawableUtils.setMouseListener(jbtnExit, "res/btn_exit");
+		
+		
+		GridLayout gridlayout = new GridLayout(0, 2);
 		gridlayout.setHgap(10);
 		mMainJpanel = new JPanel(gridlayout);
+		setLayout(null);
 		mMainJpanel.setOpaque(false);
+		mMainJpanel.add(jbtnGrammar);
+		mMainJpanel.add(jbtnExit);
 
-		mMainJpanel.add(jbtnRecognize);
-		mMainJpanel.add(jbtnGrammar);/*
-		mMainJpanel.add(jbtnUnderstander);
-		mMainJpanel.add(jbtnSynthesize);*/
-
-		jbtnRecognize.addActionListener(this);
-		jbtnGrammar.addActionListener(this);/*
-		jbtnUnderstander.addActionListener(this);
-		jbtnSynthesize.addActionListener(this);*/
+		jbtnGrammar.addActionListener(this);
+		jbtnExit.addActionListener(this);
 
 		mContentPanel = new JPanel(new BorderLayout());
+		
+		mContentPanel.add(loginView);
+	//	mContentPanel.add(mMainJpanel, BorderLayout.CENTER);
 		mContentPanel.setOpaque(false);
-		mContentPanel.add(mMainJpanel, BorderLayout.CENTER);
-
+		
 		setLocationRelativeTo(null);
 		setContentPane(mContentPanel);
 		setVisible(true);
@@ -116,6 +119,11 @@ public class MainView extends JFrame implements ActionListener {
 	 */
 	public static void main(String args[]) {
 		mJframe = new MainView();
+		
+		FileLinkOpen fi = new FileLinkOpen();
+		
+		System.out.println(fi.getAllFileName().size());
+		System.out.println(fi.AllToString());
 	}
 
 	public static JFrame getFrame() {
@@ -134,30 +142,28 @@ public class MainView extends JFrame implements ActionListener {
 
 		return button;
 	}
+	
+	public MainView(int i){
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == jbtnRecognize) {
+		
+		if (e.getSource() == jbtnGrammar) {
 			mContentPanel.remove(mMainJpanel);
-			mContentPanel.add(new IatSpeechView());
+			mContentPanel.add(iatSpeechView);
 			mContentPanel.revalidate();
 			mContentPanel.repaint();
-		} else if (e.getSource() == jbtnGrammar) {
+		} else if(e.getSource() == jbtnExit){
 			mContentPanel.remove(mMainJpanel);
-			mContentPanel.add(new AsrSpeechView());
-			mContentPanel.revalidate();
-			mContentPanel.repaint();
-		} else if (e.getSource() == jbtnUnderstander) {
-			mContentPanel.remove(mMainJpanel);
-			mContentPanel.add(new UnderstanderView());
-			mContentPanel.revalidate();
-			mContentPanel.repaint();
-		} else if (e.getSource() == jbtnSynthesize) {
-			mContentPanel.remove(mMainJpanel);
-			mContentPanel.add(new TtsSpeechView());
-			mContentPanel.revalidate();
+			getLayeredPane().add(label_login, new Integer(Integer.MIN_VALUE));
+			getLayeredPane().remove(label_main);
+			mContentPanel.add(loginView);
+			mContentPanel.validate();
 			mContentPanel.repaint();
 		}
+		
 	}
 
 	public JPanel getMainJpanel() {
@@ -167,4 +173,22 @@ public class MainView extends JFrame implements ActionListener {
 	public JPanel getContePanel() {
 		return mContentPanel;
 	}
+	
+/*	public static AsrSpeechView getAsrSpeechView() {
+		return asrSpeechView;
+	}*/
+	
+	/*public static void resetAsrSpeechView() {
+		asrSpeechView = new AsrSpeechView();
+	}
+	*/
+	public static JLabel getlabel_login() {
+		return label_login;
+	}
+	
+	public static JLabel getlabel_main() {
+		return label_main;
+	}
+	
+	
 }
