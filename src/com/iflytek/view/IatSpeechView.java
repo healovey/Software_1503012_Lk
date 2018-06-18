@@ -38,6 +38,7 @@ import com.iflytek.cloud.speech.SpeechRecognizer;
 import com.iflytek.util.DebugLog;
 import com.iflytek.util.DrawableUtils;
 
+import VoiceControl.applicationControl;
 import intent.HttpGet;
 import intent.IntentGet;
 
@@ -55,6 +56,8 @@ public class IatSpeechView extends JPanel implements ActionListener {
 	
 	//new added
 	private static JTextArea resultArea;
+	
+	private applicationControl on;
 
 	//JTextArea resultArea;
 
@@ -140,6 +143,8 @@ public class IatSpeechView extends JPanel implements ActionListener {
 		jbtnStop.addActionListener(this);
 		jbtnCancel.addActionListener(this);
 		jbtnSet.addActionListener( this );
+		
+		on = new applicationControl();
 		
 		initParamMap();
 		initMenu();
@@ -243,14 +248,19 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			//text = json.getJSONArray("ws").getJSONObject(0).getJSONArray("cw").getJSONObject(0).getString("w");
 			IntentGet result = null;
 			try {
-				result = HttpGet.getIntent(str, MainView.getIntentDefaultSet());
+				result = HttpGet.getIntent(str.toUpperCase(), MainView.getIntentDefaultSet());
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//result.out();
 			text = result.getSoftwareName();
+			//resultArea.append(str);
 			resultArea.append(str);
+			
+			on.fileOpen(text);
+			
+			
 			//result.out();
 			//System.out.println(result.origin);
 			text = resultArea.getText();
