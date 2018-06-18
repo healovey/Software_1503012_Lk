@@ -35,9 +35,10 @@ public class IntentDefaultSet {
 			while ((tempString = reader.readLine()) != null) {  
 				 String[] t = tempString.split(":");
 				 if(t.length != 2) {
-					 System.out.println("error in aliasname: " + tempString);
+//					 System.out.println("error in aliasname: " + tempString);
 					 continue;
 				 }
+//				 System.out.println("add alias: " + t[0] +" -> "+t[1]);
 				 aliasname.put(t[0], t[1]);
 			}
 			reader.close();

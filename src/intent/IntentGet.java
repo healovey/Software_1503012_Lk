@@ -50,14 +50,18 @@ public class IntentGet {
 			}
 		}
 		name = set.aliasname.getOrDefault(name, name);
+//		System.out.println(set.aliasname);
+//		System.out.println(name);
 		if(set.useexename) {
 			float[] nameper = new float[set.exenames.length];
 			for(int i = 0; i < set.exenames.length; i++) {
-				if(set.exenames[i].matches(name)) {
+//				System.out.println(set.exenames[i] +" [match] " + name);
+				if( set.exenames[i].indexOf(name) != -1 ) {
 					nameper[i] = (float)name.length() / set.exenames[i].length();
 				}else {
 					nameper[i] = 0;
 				}
+				System.out.println(nameper[i]);
 			}
 			
 			int maxid = -1;

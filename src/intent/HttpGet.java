@@ -84,10 +84,10 @@ public class HttpGet {
 		return result;
 	}
 	public static void main(String[] args) throws Throwable {
-		String[] exenames = {"mmm Word","360"};
+		String[] exenames = {"腾讯QQ v_1.2.1","mmm Word","360"};
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(exenames);
 		
-		IntentGet result = getIntent("打开QQ", intentDefaultSet);
+		IntentGet result = getIntent("打开腾讯qq。", intentDefaultSet);
 		result.out();
 	}
 }
