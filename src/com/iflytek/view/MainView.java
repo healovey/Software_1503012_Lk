@@ -15,6 +15,8 @@ import com.iflytek.cloud.speech.SpeechUtility;
 import com.iflytek.util.DrawableUtils;
 import com.iflytek.util.Version;
 
+import intent.IntentDefaultSet;
+
 /**
  * MscDemo It's a Sample using MSC SDK, include tts, isr. you can just press
  * button to use it.
@@ -32,6 +34,11 @@ public class MainView extends JFrame implements ActionListener {
 	private static JLabel label_main;
 	private JButton jbtnGrammar;
 	private JButton jbtnExit;
+	
+	
+	private FileLinkOpen fileLinkOpen ;
+	private static IntentDefaultSet intentDefaultSet;
+	
 	/*
 	private JButton jbtnExe1;
 	private JButton jbtnExe2;
@@ -110,6 +117,14 @@ public class MainView extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setContentPane(mContentPanel);
 		setVisible(true);
+		
+		fileLinkOpen = new FileLinkOpen();
+		String allFilename [] = new String[fileLinkOpen.AllFileSize()];
+		for (int i = 0; i<fileLinkOpen.AllFileSize(); i++){
+			allFilename[i] = (String) fileLinkOpen.getAllFileName().get(i);
+		}
+		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(allFilename);
+		
 	}
 
 	/**
@@ -190,5 +205,8 @@ public class MainView extends JFrame implements ActionListener {
 		return label_main;
 	}
 	
+	public static IntentDefaultSet getIntentDefaultSet(){
+		return intentDefaultSet;
+	}
 	
 }

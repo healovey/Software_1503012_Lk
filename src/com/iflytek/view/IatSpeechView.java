@@ -26,6 +26,9 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.iflytek.cloud.speech.RecognizerListener;
 import com.iflytek.cloud.speech.RecognizerResult;
 import com.iflytek.cloud.speech.ResourceUtil;
@@ -34,6 +37,10 @@ import com.iflytek.cloud.speech.SpeechError;
 import com.iflytek.cloud.speech.SpeechRecognizer;
 import com.iflytek.util.DebugLog;
 import com.iflytek.util.DrawableUtils;
+
+import intent.HttpGet;
+import intent.IntentGet;
+
 
 public class IatSpeechView extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -224,8 +231,30 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			//如果要解析json结果，请考本项目示例的 com.iflytek.util.JsonParser类
 //			String text = JsonParser.parseIatResult(results.getResultString());
 			String text = results.getResultString();
-			resultArea.append(text);
-			text = resultArea.getText();
+			
+			JSONObject json = null;
+			json = new JSONObject(text);
+			
+			String str = "";
+			JSONArray ws = json.getJSONArray("ws");
+			for (int i = 0; i<ws.length(); i++){
+				str += ws.getJSONObject(i).getJSONArray("cw").getJSONObject(0).getString("w");
+			}
+			//text = json.getJSONArray("ws").getJSONObject(0).getJSONArray("cw").getJSONObject(0).getString("w");
+			IntentGet result = null;
+			try {
+				result = HttpGet.getIntent(str, MainView.getIntentDefaultSet());
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//result.out();
+			
+			
+			resultArea.append(str);
+			//result.out();
+			//System.out.println(result.origin);
+			//text = resultArea.getText();
 			if( null!=text ){
 				int n = text.length() / TEXT_COUNT + 1;
 				int fontSize = Math.max( 10, DEF_FONT_SIZE - 2*n );
@@ -239,6 +268,8 @@ public class IatSpeechView extends JPanel implements ActionListener {
 				iatSpeechInitUI();
 			}
 		}
+
+	
 
 		@Override
 		public void onVolumeChanged(int volume) {
