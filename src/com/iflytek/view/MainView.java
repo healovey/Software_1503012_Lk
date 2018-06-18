@@ -64,8 +64,8 @@ public class MainView extends JFrame implements ActionListener {
 
 		label_login = new JLabel(background1);
 		label_main = new JLabel(background);
-		//label_login.setBounds(0, 0, background1.getIconWidth(),
-		//		background1.getIconHeight());
+		label_login.setBounds(0, 0, background1.getIconWidth(),
+				background1.getIconHeight());
 		label_main.setBounds(0, 0, background.getIconWidth(),
 				background.getIconHeight());
 	    
