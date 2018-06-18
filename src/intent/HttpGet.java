@@ -18,7 +18,6 @@ public class HttpGet {
             String urlNameString = url + "?" + param;          
             
             URL realUrl = new URL(urlNameString);
-//            System.out.println((realUrl.toString()));
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
@@ -88,7 +87,7 @@ public class HttpGet {
 		String[] exenames = {"腾讯QQv1.1","mmm Word"};
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(exenames);
 		
-		IntentGet result = getIntent("打开qq", intentDefaultSet);
+		IntentGet result = getIntent("打开QQ", intentDefaultSet);
 		result.out();
 	}
 }
