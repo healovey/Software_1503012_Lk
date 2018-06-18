@@ -250,10 +250,10 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			}
 			//result.out();
 			text = result.getSoftwareName();
-			resultArea.append(text);
+			resultArea.append(str);
 			//result.out();
 			//System.out.println(result.origin);
-			//text = resultArea.getText();
+			text = resultArea.getText();
 			if( null!=text ){
 				int n = text.length() / TEXT_COUNT + 1;
 				int fontSize = Math.max( 10, DEF_FONT_SIZE - 2*n );
