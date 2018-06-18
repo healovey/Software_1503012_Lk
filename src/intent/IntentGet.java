@@ -52,22 +52,22 @@ public class IntentGet {
 		name = set.aliasname.getOrDefault(name, name);
 		if(set.useexename) {
 			float[] nameper = new float[set.exenames.length];
-			for(int i = 0; i < set.exenames.length - 1; i++) {
+			for(int i = 0; i < set.exenames.length; i++) {
 				if(set.exenames[i].matches(name)) {
-					nameper[i] = name.length() / set.exenames[i].length();
+					nameper[i] = (float)name.length() / set.exenames[i].length();
 				}else {
 					nameper[i] = 0;
 				}
 			}
 			int maxid = -1;
 			float maxnum = -1;
-			for(int i = 0; i < nameper.length - 1; i++) {
+			for(int i = 0; i < nameper.length; i++) {
 				if(nameper[i] > maxnum) {
 					maxnum = nameper[i];
 					maxid = i;
 				}
 			}
-			if(maxnum != -1) {
+			if(maxnum > 0) {
 				name = set.exenames[maxid];
 			}else {
 				name = "";
