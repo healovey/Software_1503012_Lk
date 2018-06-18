@@ -61,7 +61,7 @@ public class IntentGet {
 				}else {
 					nameper[i] = 0;
 				}
-				System.out.println(nameper[i]);
+//				System.out.println(nameper[i]);
 			}
 			
 			int maxid = -1;
@@ -75,6 +75,7 @@ public class IntentGet {
 			if(maxnum > 0) {
 				name = set.exenames[maxid];
 			}else {
+				loging.log("unknow name \"" + name + "\"");
 				name = "";
 			}
 		}

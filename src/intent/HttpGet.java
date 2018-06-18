@@ -87,7 +87,7 @@ public class HttpGet {
 		String[] exenames = {"腾讯QQ v_1.2.1","mmm Word","360"};
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(exenames);
 		
-		IntentGet result = getIntent("打开腾讯qq。", intentDefaultSet);
+		IntentGet result = getIntent("打开sublime。", intentDefaultSet);
 		result.out();
 	}
 }
