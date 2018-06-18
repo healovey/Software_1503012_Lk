@@ -123,7 +123,7 @@ public class MainView extends JFrame implements ActionListener {
 		for (int i = 0; i<fileLinkOpen.AllFileSize(); i++){
 			allFilename[i] = (String) fileLinkOpen.getAllFileName().get(i);
 		}
-		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(allFilename);
+		intentDefaultSet = new IntentDefaultSet(allFilename);
 		
 	}
 
@@ -138,6 +138,7 @@ public class MainView extends JFrame implements ActionListener {
 		FileLinkOpen fi = new FileLinkOpen();
 		
 		System.out.println(fi.getAllFileName().size());
+	
 		System.out.println(fi.AllToString());
 	}
 

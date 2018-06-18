@@ -5,7 +5,7 @@ import intent.IntentDefaultSet;
 import intent.IntentGet;
 
 public class TEST {
-	public static void main(String args[]) throws Throwable {
+/*	public static void main(String args[]) throws Throwable {
 		
 		
 		FileLinkOpen fi = new FileLinkOpen();
@@ -20,7 +20,7 @@ public class TEST {
 		IntentGet result = HttpGet.getIntent("打开腾讯QQ", intentDefaultSet);
 		//result.out();
 		System.out.println(result.getSoftwareName());
-	}
+	}*/
 
 
 }

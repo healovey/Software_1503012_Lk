@@ -65,8 +65,8 @@ public class FileLinkOpen{
 		
 		String grammar = "";
 		int size = fileName.size()-1;
-		for(int i = 0;i <= 20;i++){
-			if(i != 20)
+		for(int i = 0;i < size;i++){
+			if(i != size-1)
 			grammar += fileName.get(i).toString()+" | ";
 			else {
 				grammar += fileName.get(i).toString()+";";

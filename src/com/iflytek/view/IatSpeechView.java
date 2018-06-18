@@ -249,9 +249,8 @@ public class IatSpeechView extends JPanel implements ActionListener {
 				e.printStackTrace();
 			}
 			//result.out();
-			
-			
-			resultArea.append(str);
+			text = result.getSoftwareName();
+			resultArea.append(text);
 			//result.out();
 			//System.out.println(result.origin);
 			//text = resultArea.getText();
