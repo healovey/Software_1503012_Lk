@@ -59,6 +59,7 @@ public class IntentGet {
 					nameper[i] = 0;
 				}
 			}
+			
 			int maxid = -1;
 			float maxnum = -1;
 			for(int i = 0; i < nameper.length; i++) {
