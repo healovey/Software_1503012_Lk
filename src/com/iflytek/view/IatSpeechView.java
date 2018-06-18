@@ -248,15 +248,15 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			//text = json.getJSONArray("ws").getJSONObject(0).getJSONArray("cw").getJSONObject(0).getString("w");
 			IntentGet result = null;
 			try {
-				result = HttpGet.getIntent(str.toUpperCase(), MainView.getIntentDefaultSet());
+				result = HttpGet.getIntent(str, MainView.getIntentDefaultSet());
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//result.out();
+			result.out();
 			text = result.getSoftwareName();
 			//resultArea.append(str);
-			resultArea.append(str);
+			resultArea.append(text);
 			
 			on.fileOpen(text);
 			
