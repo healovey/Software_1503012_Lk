@@ -1,4 +1,4 @@
-package Controler;
+package VoiceControl;
 
 
 import java.io.File;
@@ -10,9 +10,9 @@ public class FileLinkOpen{
 	private  static ArrayList fileAddress = new ArrayList<String>();
     private static ArrayList fileName = new ArrayList<String>();
 	public FileLinkOpen() {
-		 //    ÔÚ´ËÄ¿Â¼ÖÐÕÒÎÄ¼þ   
+		 //    ï¿½Ú´ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½   
         String baseDIR = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs";    
-        //    ÕÒÀ©Õ¹ÃûÎªlnkµÄÎÄ¼þ   
+        //    ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½Îªlnkï¿½ï¿½ï¿½Ä¼ï¿½   
         String file_name = "*.lnk";    
         findFiles(baseDIR, file_name,fileAddress);    
         if (fileAddress.size() == 0) {   
@@ -40,7 +40,7 @@ public class FileLinkOpen{
             }
             /*
             for(int i = 0;i < fileAddress.size();i++){
-            	System.out.println("ÎÄ¼þÃûÎª£º"+fileName.get(i)+" µØÖ·Îª "+ fileAddress.get(i));
+            	System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½Îªï¿½ï¿½"+fileName.get(i)+" ï¿½ï¿½Ö·Îª "+ fileAddress.get(i));
             }
             */
         }   
@@ -63,19 +63,19 @@ public class FileLinkOpen{
 		FileLinkOpen fileOpen = new FileLinkOpen();
 	}
 	/**  
-     * µÝ¹é²éÕÒÎÄ¼þ  
-     * @param baseDirName  ²éÕÒµÄÎÄ¼þ¼ÐÂ·¾¶  
-     * @param targetFileName  ÐèÒª²éÕÒµÄÎÄ¼þÃû  
-     * @param fileList  ²éÕÒµ½µÄÎÄ¼þ¼¯ºÏ  
+     * ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½  
+     * @param baseDirName  ï¿½ï¿½ï¿½Òµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½  
+     * @param targetFileName  ï¿½ï¿½Òªï¿½ï¿½ï¿½Òµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½  
+     * @param fileList  ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½  
      */  
     public static void findFiles(String baseDirName, String targetFileName, ArrayList fileList) {   
       
-    	File baseDir = new File(baseDirName);		// ´´½¨Ò»¸öFile¶ÔÏó
-		if (!baseDir.exists() || !baseDir.isDirectory()) {	// ÅÐ¶ÏÄ¿Â¼ÊÇ·ñ´æÔÚ
-			System.out.println("ÎÄ¼þ²éÕÒÊ§°Ü£º" + baseDirName + "²»ÊÇÒ»¸öÄ¿Â¼£¡");
+    	File baseDir = new File(baseDirName);		// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Fileï¿½ï¿½ï¿½ï¿½
+		if (!baseDir.exists() || !baseDir.isDirectory()) {	// ï¿½Ð¶ï¿½Ä¿Â¼ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+			System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½" + baseDirName + "ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ä¿Â¼ï¿½ï¿½");
 		}
         String tempName = null;   
-        //ÅÐ¶ÏÄ¿Â¼ÊÇ·ñ´æÔÚ   
+        //ï¿½Ð¶ï¿½Ä¿Â¼ï¿½Ç·ï¿½ï¿½ï¿½ï¿½   
         File tempFile;
     	File[] files = baseDir.listFiles();
     	for (int i = 0; i < files.length; i++) {
@@ -85,7 +85,7 @@ public class FileLinkOpen{
 			}else if(tempFile.isFile()){
 				tempName = tempFile.getName();
 				if(wildcardMatch(targetFileName, tempName)){
-					// Æ¥Åä³É¹¦£¬½«ÎÄ¼þÃûÌí¼Óµ½½á¹û¼¯
+					// Æ¥ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					fileList.add(tempFile.getAbsoluteFile());
 				}
 			}
@@ -93,10 +93,10 @@ public class FileLinkOpen{
     }   
        
     /**  
-     * Í¨Åä·ûÆ¥Åä  
-     * @param pattern    Í¨Åä·ûÄ£Ê½  
-     * @param str    ´ýÆ¥ÅäµÄ×Ö·û´®  
-     * @return    Æ¥Åä³É¹¦Ôò·µ»Øtrue£¬·ñÔò·µ»Øfalse  
+     * Í¨ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½  
+     * @param pattern    Í¨ï¿½ï¿½ï¿½Ä£Ê½  
+     * @param str    ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½  
+     * @return    Æ¥ï¿½ï¿½É¹ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½false  
      */  
     private static boolean wildcardMatch(String pattern, String str) {   
         int patternLength = pattern.length();   
@@ -106,7 +106,7 @@ public class FileLinkOpen{
         for (int patternIndex = 0; patternIndex < patternLength; patternIndex++) {   
             ch = pattern.charAt(patternIndex);   
             if (ch == '*') {   
-                //Í¨Åä·ûÐÇºÅ*±íÊ¾¿ÉÒÔÆ¥ÅäÈÎÒâ¶à¸ö×Ö·û   
+                //Í¨ï¿½ï¿½ï¿½ï¿½Çºï¿½*ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½   
                 while (strIndex < strLength) {   
                     if (wildcardMatch(pattern.substring(patternIndex + 1),   
                             str.substring(strIndex))) {   
@@ -115,10 +115,10 @@ public class FileLinkOpen{
                     strIndex++;   
                 }   
             } else if (ch == '?') {   
-                //Í¨Åä·ûÎÊºÅ?±íÊ¾Æ¥ÅäÈÎÒâÒ»¸ö×Ö·û   
+                //Í¨ï¿½ï¿½ï¿½ï¿½Êºï¿½?ï¿½ï¿½Ê¾Æ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½   
                 strIndex++;   
                 if (strIndex > strLength) {   
-                    //±íÊ¾strÖÐÒÑ¾­Ã»ÓÐ×Ö·ûÆ¥Åä?ÁË¡£   
+                    //ï¿½ï¿½Ê¾strï¿½ï¿½ï¿½Ñ¾ï¿½Ã»ï¿½ï¿½ï¿½Ö·ï¿½Æ¥ï¿½ï¿½?ï¿½Ë¡ï¿½   
                     return false;   
                 }   
             } else {   

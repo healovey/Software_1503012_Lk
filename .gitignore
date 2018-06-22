@@ -1,0 +1,3 @@
+*.class
+bin/*/*.class
+data/log.txt

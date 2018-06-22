@@ -18,7 +18,7 @@ public class TEST {
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(allFilename);
 		
 		//System.out.println(allFilename[168]);
-		String str = "打开腾讯qq。";
+		String str = "打开TIM。";
 		
 		IntentGet result = HttpGet.getIntent(str, intentDefaultSet);
 		result.out();

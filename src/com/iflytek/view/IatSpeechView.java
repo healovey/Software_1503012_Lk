@@ -256,10 +256,27 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			result.out();
 			text = result.getSoftwareName();
 			//resultArea.append(str);
-			resultArea.append(text);
-			
-			on.fileOpen(text);
-			
+			if(result.type == "control"){
+				resultArea.append(text);
+				
+	            on.systemOpen(text);
+			}
+			else if(result.type == "list"){
+				resultArea.append(text);
+				
+	            on.fileOpen(text);		
+			}
+			else if(result.type == "null" && json.getInt("sn") == 1){
+				resultArea.append("没有此应用！");	
+			}
+			else if(result.type == "intenterror"){
+				//在用户确认后
+				result.getSoftwareName(true);
+				resultArea.append(text);
+				
+	            on.fileOpen(text);
+			}
+			resultArea.append(results.getResultString());
 			
 			//result.out();
 			//System.out.println(result.origin);

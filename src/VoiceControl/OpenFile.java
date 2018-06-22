@@ -1,4 +1,4 @@
-package Controler;
+package VoiceControl;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 public class OpenFile {
 	
 	public static void main(String[] args) throws IOException{
-		openWindowsExe("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ÌÚÑ¶Èí¼þ\\TIM\\TIM.lnk");
+		openWindowsExe("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ï¿½ï¿½Ñ¶ï¿½ï¿½ï¿½\\TIM\\TIM.lnk");
 	}
 	
 	public OpenFile(){

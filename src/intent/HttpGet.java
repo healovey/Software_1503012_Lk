@@ -77,9 +77,9 @@ public class HttpGet {
 		result.score = Float.parseFloat(topScoringIntent.get("score").toString());
 		JSONArray entities = jsonObject.getJSONArray("entities");
 		if (entities.length() > 0) {
-			result.name = entities.getJSONObject(0).get("entity").toString();
+			result.originname = entities.getJSONObject(0).get("entity").toString();
 		}else {
-			result.name = "";
+			result.originname = "";
 		}
 		return result;
 	}
@@ -87,7 +87,11 @@ public class HttpGet {
 		String[] exenames = {"腾讯QQ v_1.2.1","mmm Word","360"};
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(exenames);
 		
-		IntentGet result = getIntent("打开sublime。", intentDefaultSet);
+		IntentGet result = getIntent("打开控制面板。", intentDefaultSet);
+		result.out();
+		result = getIntent("打开qq。", intentDefaultSet);
+		result.out();
+		result = getIntent("打开sublime。", intentDefaultSet);
 		result.out();
 	}
 }
