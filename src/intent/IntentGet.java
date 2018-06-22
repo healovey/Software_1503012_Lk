@@ -28,12 +28,17 @@ public class IntentGet {
 	
 	public void out() {
 		System.out.println("strs: "+ origin);
-		getSoftwareName(true);
+		getSoftwareName();
 		System.out.println("\tintent: " + intent + "\tscore: " + score + "\tnametype: "+ this.type +"\tname: " + name);
 	}
 	
 	public String getSoftwareName() {
-		return getSoftwareName(false);
+		if(intent.equals("设备控制.打开应用")) {
+			return getSoftwareName(true);
+		}else {
+			this.type = "intenterror";
+			return "";
+		}
 	}
 	
 	public String getSoftwareName(boolean doit) {
