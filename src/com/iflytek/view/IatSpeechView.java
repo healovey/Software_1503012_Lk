@@ -392,6 +392,111 @@ public class IatSpeechView extends JPanel implements ActionListener {
 			this.addRadioMenu( "方言", SpeechConstant.ACCENT, accentMap, DefaultValue.ACCENT, mRadioItemListener );
 		}
 		
+		//字体大小
+		{
+			JMenu TextSize = new JMenu ("字体大小"); 
+			
+			JMenuItem sizeS = new JMenuItem("小");  
+			JMenuItem sizeM = new JMenuItem("中");  
+			JMenuItem sizeL = new JMenuItem("大");
+			
+			TextSize.add(sizeS);
+	        TextSize.add(sizeM);
+	        TextSize.add(sizeL);
+	        
+	        
+	        ActionListener TextSizeListener = new ActionListener() {
+	    		
+	    		@Override
+	    		public void actionPerformed(ActionEvent e) {
+	    			// TODO Auto-generated method stub
+	    			if (e.getSource().equals(sizeS)){  
+	    	    		
+	    				Font newFont = new Font(DEF_FONT_NAME, DEF_FONT_STYLE, DEF_FONT_SIZE -5);
+	    				resultArea.setFont( newFont );
+	    				
+	    			
+	            } else if(e.getSource().equals(sizeM)){ 
+	        	
+	    				Font newFont = new Font(DEF_FONT_NAME, DEF_FONT_STYLE, DEF_FONT_SIZE);
+	    				resultArea.setFont( newFont );
+	    		
+	            } else if(e.getSource().equals(sizeL)){  
+	        		
+	    				Font newFont = new Font(DEF_FONT_NAME, DEF_FONT_STYLE, DEF_FONT_SIZE +5);
+	    				resultArea.setFont( newFont );
+	    				} 
+	    		}
+	    	};
+	        
+	        
+	        
+	        sizeS.addActionListener(TextSizeListener);  
+	        sizeM.addActionListener(TextSizeListener);  
+	        sizeL.addActionListener(TextSizeListener);
+	        
+	        this.mSettingMenu.add( TextSize );
+			
+	        
+	        
+		}
+		
+		
+		//字体颜色
+				{
+					JMenu TextColor = new JMenu ("字体颜色");  
+					
+					JMenuItem jm1 = new JMenuItem("蓝");  
+					JMenuItem jm2 = new JMenuItem("绿");  
+					JMenuItem jm3 = new JMenuItem("红"); 
+					JMenuItem jm4 = new JMenuItem("黑");
+					
+					  TextColor.add(jm1);
+				        TextColor.add(jm2);
+				        TextColor.add(jm3);
+				        TextColor.add(jm4);
+			        
+			        
+			        ActionListener TextColorListener = new ActionListener() {
+			    		
+			    		@Override
+			    		public void actionPerformed(ActionEvent e) {
+			    			// TODO Auto-generated method stub
+			    			if (e.getSource().equals(jm1)){  
+			    				
+			    				resultArea.setForeground(Color.BLUE);
+			    				
+			    			} else if(e.getSource().equals(jm2)){ 
+			    		
+			    				resultArea.setForeground(Color.green);  
+			    	       
+			    			} else if(e.getSource().equals(jm3)){  
+			    		
+			    				resultArea.setForeground(Color.red);  
+			    				
+			    	        } else if(e.getSource().equals(jm4)){  
+			    		
+			    				resultArea.setForeground(Color.black);  
+			    				
+			    	        }
+			    		}
+			    	};
+			        
+			        
+			        
+			    	 jm1.addActionListener(TextColorListener);  
+			         jm2.addActionListener(TextColorListener);  
+			         jm3.addActionListener(TextColorListener);
+			         jm4.addActionListener(TextColorListener);
+			        
+			        this.mSettingMenu.add( TextColor);
+					
+			        
+			        
+				}
+		
+		
+		
 		//领域
 		{
 			Map<String, String> domainMap = new LinkedHashMap<String, String>();
@@ -576,4 +681,10 @@ public class IatSpeechView extends JPanel implements ActionListener {
 		}// end of if is TYPE_LOCAL
 		
 	}// end of function setting
+
+
+
+	
+
+
 }

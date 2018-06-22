@@ -3,8 +3,8 @@ package VoiceControl;
 public class applicationControl {
 	private fileData data = new fileData();
 	private OpenFile execFile = new OpenFile();
-	private String fileName;
-	private String saveFileName = "temp.txt";
+	private static String fileName;
+	private String saveFileName;
 	
 	public applicationControl(String saveFileName){
 		FileSave save = new FileSave(saveFileName);
@@ -26,16 +26,12 @@ public class applicationControl {
 		return 0;
 	}
 	
-	public int fileOpen(){
-		for(int i = 0;i < data.getSize();i++){
-			if(fileName.matches(data.getFileName().get(i).toString())){
-				//System.out.println(data.getFileAddress().get(i).toString());
-				execFile.openWindowsExe(data.getFileAddress().get(i).toString());
-				System.out.println("ok");
-				return 1;
-			}
+	public int systemOpen(String filename){
+		if(execFile.openWindowsExe(filename) == true){
+			System.out.println("ok");
+			return 1;
 		}
-		return 0;
+	return 0;
 	}
 	
 	public void setFileName(String filename){
@@ -44,7 +40,8 @@ public class applicationControl {
 	
 	public static void main(String argc[]){
 		applicationControl app = new applicationControl("temp");
-		if(app.fileOpen("TIM") == 1){
+		fileName = "control";
+		if(app.systemOpen(fileName) == 1){
 			System.out.println("open successful");
 		}
 	}
