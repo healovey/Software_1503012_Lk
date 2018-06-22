@@ -72,6 +72,12 @@ public class HttpGet {
 		String json = sendData( strs );
 		System.out.println(json);
 		JSONObject jsonObject = new JSONObject(json);
+//		System.out.println(jsonObject.get("query").toString());
+		if(jsonObject.get("query").toString()=="null") {
+			result.intent = "null";
+			result.originname = "";
+			return result;
+		}
 		JSONObject topScoringIntent = jsonObject.getJSONObject("topScoringIntent");
 		result.intent = topScoringIntent.get("intent").toString();
 		result.score = Float.parseFloat(topScoringIntent.get("score").toString());
@@ -86,8 +92,10 @@ public class HttpGet {
 	public static void main(String[] args) throws Throwable {
 		String[] exenames = {"腾讯QQ v_1.2.1","mmm Word","360"};
 		IntentDefaultSet intentDefaultSet = new IntentDefaultSet(exenames);
-		
-		IntentGet result = getIntent("打开控制面板。", intentDefaultSet);
+		IntentGet result;
+		result = getIntent("", intentDefaultSet);
+		result.out();
+		result = getIntent("打开控制面板。", intentDefaultSet);
 		result.out();
 		result = getIntent("打开qq。", intentDefaultSet);
 		result.out();
