@@ -4,9 +4,11 @@ package intent;
 public class IntentGet {
 	
 	public String origin;
+	public String originname;
 	public String name;
 	public String intent;
 	public float score;
+	public String type;
 	
 	private IntentDefaultSet set;
 	
@@ -26,19 +28,22 @@ public class IntentGet {
 	
 	public void out() {
 		System.out.println("strs: "+ origin);
-		System.out.println("\tintent: " + intent + "\tscore: " + score + "\tname: " + getSoftwareName(true));
+		getSoftwareName(true);
+		System.out.println("\tintent: " + intent + "\tscore: " + score + "\tnametype: "+ this.type +"\tname: " + name);
 	}
 	
 	public String getSoftwareName() {
 		return getSoftwareName(false);
 	}
+	
 	public String getSoftwareName(boolean doit) {
+		if(this.name != null) return this.name;
 		String name;
-		if(this.name == "") {
+		if(this.originname == "") {
 			name = origin;
 			doit = true;
 		}else {
-			name = this.name;
+			name = this.originname;
 		}
 			
 		if(doit) {
@@ -49,19 +54,23 @@ public class IntentGet {
 				name = r[0];
 			}
 		}
+		if(set.controlnames.get(name) != null) {
+			name = set.controlnames.get(name);
+			type = "control";
+			this.name = name;
+			return name;
+		}
+
 		name = set.aliasname.getOrDefault(name, name);
-//		System.out.println(set.aliasname);
-//		System.out.println(name);
+
 		if(set.useexename) {
 			float[] nameper = new float[set.exenames.length];
 			for(int i = 0; i < set.exenames.length; i++) {
-//				System.out.println(set.exenames[i] +" [match] " + name);
 				if( set.exenames[i].indexOf(name) != -1 ) {
 					nameper[i] = (float)name.length() / set.exenames[i].length();
 				}else {
 					nameper[i] = 0;
 				}
-//				System.out.println(nameper[i]);
 			}
 			
 			int maxid = -1;
@@ -74,12 +83,14 @@ public class IntentGet {
 			}
 			if(maxnum > 0) {
 				name = set.exenames[maxid];
+				type = "list";
 			}else {
 				loging.log("unknow name \"" + name + "\"");
 				name = "";
+				type = "null";
 			}
 		}
-		
+		this.name = name;
 		return name;
 	}
 }
