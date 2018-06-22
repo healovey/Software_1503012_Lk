@@ -67,35 +67,44 @@ public class IntentGet {
 		}
 
 		name = set.aliasname.getOrDefault(name, name);
-
+		
 		if(set.useexename) {
-			float[] nameper = new float[set.exenames.length];
-			for(int i = 0; i < set.exenames.length; i++) {
-				if( set.exenames[i].indexOf(name) != -1 ) {
-					nameper[i] = (float)name.length() / set.exenames[i].length();
-				}else {
-					nameper[i] = 0;
-				}
-			}
-			
-			int maxid = -1;
-			float maxnum = -1;
-			for(int i = 0; i < nameper.length; i++) {
-				if(nameper[i] > maxnum) {
-					maxnum = nameper[i];
-					maxid = i;
-				}
-			}
-			if(maxnum > 0) {
-				name = set.exenames[maxid];
+			String rn = getMostSameName(name, set.exenames);
+			if(rn != "") {
+				name = rn;
 				type = "list";
 			}else {
 				loging.log("unknow name \"" + name + "\"");
-				name = "";
 				type = "null";
 			}
 		}
 		this.name = name;
+		return name;
+	}
+	private String getMostSameName(String name, String[] list) {
+
+		float[] nameper = new float[list.length];
+		for(int i = 0; i < list.length; i++) {
+			if( list[i].indexOf(name) != -1 ) {
+				nameper[i] = (float)name.length() / list[i].length();
+			}else {
+				nameper[i] = 0;
+			}
+		}
+		
+		int maxid = -1;
+		float maxnum = -1;
+		for(int i = 0; i < nameper.length; i++) {
+			if(nameper[i] > maxnum) {
+				maxnum = nameper[i];
+				maxid = i;
+			}
+		}
+		if(maxnum > 0) {
+			name = list[maxid];
+		}else {
+			name = "";
+		}
 		return name;
 	}
 }
