@@ -1,3 +1,4 @@
 *.class
 bin/*/*.class
 data/log.txt
+data/log.txt
