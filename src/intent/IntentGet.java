@@ -19,12 +19,6 @@ public class IntentGet {
 		this.set = new IntentDefaultSet();
 	}
 	
-	public boolean ifname() {
-		if(name=="")
-			return false;
-		else
-			return true;
-	}
 	
 	public void out() {
 		System.out.println("strs: "+ origin);
@@ -33,7 +27,10 @@ public class IntentGet {
 	}
 	
 	public String getSoftwareName() {
-		if(intent.equals("设备控制.打开应用")) {
+		if(intent.equals("None")) {
+			return getSoftwareName(true);
+		}
+		else if(intent.equals("设备控制.打开应用")) {
 			return getSoftwareName(true);
 		}else {
 			this.type = "intenterror";
@@ -81,6 +78,7 @@ public class IntentGet {
 		this.name = name;
 		return name;
 	}
+
 	private String getMostSameName(String name, String[] list) {
 
 		float[] nameper = new float[list.length];
@@ -91,7 +89,7 @@ public class IntentGet {
 				nameper[i] = 0;
 			}
 		}
-		
+
 		int maxid = -1;
 		float maxnum = -1;
 		for(int i = 0; i < nameper.length; i++) {

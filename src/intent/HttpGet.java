@@ -101,6 +101,10 @@ public class HttpGet {
 		result.out();
 		result = getIntent("打开sublime。", intentDefaultSet);
 		result.out();
+		result = getIntent("关上sublime。", intentDefaultSet);
+		result.out();
+		result = getIntent("qq。", intentDefaultSet);
+		result.out();
 	}
 }
 
